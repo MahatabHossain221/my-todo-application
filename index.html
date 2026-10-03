@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+ <title> Todo app </title>
+</head>
+  <body>
+      <h1 class="text-2xl fond-bold text-center"> My todo Application</h1>
+    </h1>
+
+<div class=" flex gap-5 item-center justify-center mt-5">
+  
+    <input id="taskinput" type="text" placeholder="Enter your task" class="border border-gray rounded-lg outline-none px-4 ">
+    <button id="addbtn" class="bg-black text-white px-3  rounded-lg"> add </button>
+</div>
+
+<ul id="todolist"> </ul>
+
+<!-- script-start-->
+<script>
+    const taskinput = document.getElementById("taskinput")
+    const addbtn = document.getElementById("addbtn")
+    const todolist = document.getElementById("todolist")
+let todos = []
+  function  rendertodos () {
+    todolist.innerHTML = ""
+
+     todos.forEach( (todo) => {
+   todolist.innerHTML +=
+   
+   ` <li> 
+    <div>
+        <input type="checkbox" ${todo.completed ? "checked" : ""}/>
+        <span>${todo.tittle}</span>
+        </div>
+    </li>
+   `})
+  }
+    addbtn.addEventListener( "click", () => {const task = taskinput.value
+
+        todos.push ({tittle:task,
+            completed:false
+        })
+        localStorage.setItem   ("todos",JSON.stringify(todos))
+        rendertodos()
+    })
+const savetodos = localStorage.getItem ("todos")
+if (savetodos) {
+    todos = JSON.parse (savetodos)
+    console.log (todos)
+}
+ 
+ 
+  rendertodos ()
+</script>
+<!-- script-End-->
+  </body>
+</html>
